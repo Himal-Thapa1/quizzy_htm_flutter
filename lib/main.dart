@@ -1,6 +1,7 @@
-import 'Question.dart';
+import 'quiz_brain.dart';
 import 'package:flutter/material.dart';
 
+QuizBrain quizBrain = QuizBrain();
 void main() => runApp(Quizzler());
 
 class Quizzler extends StatelessWidget {
@@ -39,11 +40,7 @@ class _QuizPageState extends State<QuizPage> {
   // List<bool> answers = [
   //   false,true,true,
   // ];
-  List<Question> questionBank = [
-    Question(q: "You can lead an cow down stairs but not up stairs.",a: false),
-    Question(q: "Approximately one quarter of human bones are in the feet.",a:true),
-    Question(q: "A slug's blood is green.",a:true),
-  ];
+  
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +55,7 @@ class _QuizPageState extends State<QuizPage> {
             child: Center(
               child: Text(
                 // 'This is where the question text will go.',
-                questionBank[questionsptr].questionText,
+                quizBrain.questionBank[questionsptr].questionText,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -87,7 +84,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked true.
-                bool answer= questionBank[questionsptr].questionAnswer;
+                bool answer= quizBrain.questionBank[questionsptr].questionAnswer;
                 if(answer==true){
                   print("User got it right!!!");
                 }
@@ -124,7 +121,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked false.
-                bool answer= questionBank[questionsptr].questionAnswer;
+                bool answer= quizBrain.questionBank[questionsptr].questionAnswer;
                 if(answer==false){
                   print("User got it right!!!");
                 }
