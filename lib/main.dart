@@ -1,5 +1,4 @@
-import 'dart:ffi';
-
+import 'Question.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(Quizzler());
@@ -32,13 +31,18 @@ class _QuizPageState extends State<QuizPage> {
     // Icon(Icons.close, color: Colors.red)
   ];
   int questionsptr = 0;
-  List<String> questions = [
-    'You can lead a cow down stairs but not up stairs.',
-    'Approximately one quarter of human bones are in the feet.',
-    'A slug\'s blood is green.',
-  ];
-  List<bool> answers = [
-    false,true,true,
+  // List<String> questions = [
+  //   'You can lead a cow down stairs but not up stairs.',
+  //   'Approximately one quarter of human bones are in the feet.',
+  //   'A slug\'s blood is green.',
+  // ];
+  // List<bool> answers = [
+  //   false,true,true,
+  // ];
+  List<Question> questionBank = [
+    Question(q: "You can lead an cow down stairs but not up stairs.",a: false),
+    Question(q: "Approximately one quarter of human bones are in the feet.",a:true),
+    Question(q: "A slug's blood is green.",a:true),
   ];
 
   @override
@@ -54,7 +58,7 @@ class _QuizPageState extends State<QuizPage> {
             child: Center(
               child: Text(
                 // 'This is where the question text will go.',
-                questions[questionsptr],
+                questionBank[questionsptr].questionText,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -83,7 +87,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked true.
-                bool answer= answers[questionsptr];
+                bool answer= questionBank[questionsptr].questionAnswer;
                 if(answer==true){
                   print("User got it right!!!");
                 }
@@ -120,7 +124,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked false.
-                bool answer= answers[questionsptr];
+                bool answer= questionBank[questionsptr].questionAnswer;
                 if(answer==false){
                   print("User got it right!!!");
                 }
