@@ -34,29 +34,30 @@ class _QuizPageState extends State<QuizPage> {
   ];
   void checkAnswer(bool userPickedAnswer) {
     bool correctAnswer = quizBrain.getQuestionAnswer();
-    if (userPickedAnswer == correctAnswer) {
-      print("You are right.");
-      setState(() {
-        scorekeeper.add(
-          Icon(
-            Icons.check,
-            color: Colors.green,
-          ),
-        );
-        quizBrain.nextQuestion();
-      });
-    } else {
-      print("You are wrong.");
-      setState(() {
-        scorekeeper.add(
-          Icon(
-            Icons.close,
-            color: Colors.red,
-          ),
-        );
-        quizBrain.nextQuestion();
-      });
-    }
+
+    setState(() {
+      if(quizBrain.isFinished()==true){
+        Alert(context: context, title: "CONGRATULATIONS!!!", 
+        desc: "You have reached the end of the quiz.").show();
+        quizBrain.resetQuestionNumber();
+        scorekeeper.clear();
+      }
+      else{
+      if (userPickedAnswer == correctAnswer) {
+        scorekeeper.add(Icon(
+          Icons.check,
+          color: Colors.green,
+        ));
+      } else {
+        scorekeeper.add(Icon(
+          Icons.close,
+          color: Colors.red,
+        ));
+      }
+      quizBrain.nextQuestion();
+      }
+    });
+  
   }
   // List<String> questions = [
   //   'You can lead a cow down stairs but not up stairs.',
