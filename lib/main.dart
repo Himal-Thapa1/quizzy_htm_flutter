@@ -31,7 +31,7 @@ class _QuizPageState extends State<QuizPage> {
     // Icon(Icons.check, color: Colors.green),
     // Icon(Icons.close, color: Colors.red)
   ];
-  int questionsptr = 0;
+  
   // List<String> questions = [
   //   'You can lead a cow down stairs but not up stairs.',
   //   'Approximately one quarter of human bones are in the feet.',
@@ -55,7 +55,7 @@ class _QuizPageState extends State<QuizPage> {
             child: Center(
               child: Text(
                 // 'This is where the question text will go.',
-                quizBrain.questionBank[questionsptr].questionText,
+                quizBrain.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -84,7 +84,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked true.
-                bool answer= quizBrain.questionBank[questionsptr].questionAnswer;
+                bool answer= quizBrain.getQuestionAnswer();
                 if(answer==true){
                   print("User got it right!!!");
                 }
@@ -98,7 +98,7 @@ class _QuizPageState extends State<QuizPage> {
                       color: Colors.green,
                     ),
                   );
-                  questionsptr = questionsptr + 1;
+                  quizBrain.nextQuestion();
                 });
               },
             ),
@@ -121,7 +121,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked false.
-                bool answer= quizBrain.questionBank[questionsptr].questionAnswer;
+                bool answer= quizBrain.getQuestionAnswer();
                 if(answer==false){
                   print("User got it right!!!");
                 }
@@ -135,7 +135,7 @@ class _QuizPageState extends State<QuizPage> {
                       color: Colors.red,
                     ),
                   );
-                  questionsptr = questionsptr + 1;
+                  quizBrain.nextQuestion();
                 });
               },
             ),
